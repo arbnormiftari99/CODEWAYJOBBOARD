@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const candidateRoutes = require('./routes/candidate_routes')
 
 require('dotenv').config();
 
@@ -22,7 +23,10 @@ mongoose
   });
 
 
-// app.use('/api/jobs', require('./routes/jobs'));
+app.use('/candidates', candidateRoutes);
+
+
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
