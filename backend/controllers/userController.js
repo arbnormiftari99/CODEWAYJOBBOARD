@@ -3,6 +3,7 @@ const User = require('../models/userModel');
 const asyncHandler = require('express-async-handler');
 
 
+
 const authUser = asyncHandler(async (req, res) => {
 
     res.status(200).json({ message: 'Auth user'});
@@ -11,9 +12,30 @@ const authUser = asyncHandler(async (req, res) => {
 
 
 const registerUser = asyncHandler(async (req, res) => {
-
-    res.status(200).json({ message: 'Register user'});
-
+   const {name, email, password, role} = req.body;
+    const userExists = await User.findOne({ email });
+   if(userExists){
+    res.status(400);
+    throw new Error('User already exists');
+   }
+    const user = await User.create({
+    name,
+    email,
+    password,
+    role
+   })
+    if(user){
+    res.status(201).json({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role
+    
+    })
+   } else {
+    res.status(400);
+    throw new Error('Invalid user data');
+   }
 })
 
 const loginUser = asyncHandler(async (req, res) => {
