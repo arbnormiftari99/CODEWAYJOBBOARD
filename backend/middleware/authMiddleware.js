@@ -2,9 +2,10 @@ const jwt = require('jsonwebtoken');
 const asyncHandler = require('express-async-handler');
 const User = require('../models/userModel');
 
+
 const protect = asyncHandler(async (req, res, next) => {
    let token;
-   token= req.cookies.jwt;
+   token = req.cookies.jwt;
 
    if(token){
      try {

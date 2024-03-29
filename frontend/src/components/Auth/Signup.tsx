@@ -1,17 +1,18 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLoginMutation } from '../../slices/usersApiSlice';
+import { useRegisterMutation } from '../../slices/usersApiSlice';
 import { setCredentials } from '../../slices/authSlice';
 import { toast } from 'react-toastify';
-const Login: React.FC = () => {
+const Signup: React.FC = () => {
+	const [name, setName] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
 	
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
-	const [login, { isLoading }] = useLoginMutation();
+	const [register, { isLoading }] = useRegisterMutation();
 
 	const { userInfo } = useSelector((state: any) => state.auth);
 
@@ -21,8 +22,12 @@ const Login: React.FC = () => {
 		}
 	}, [navigate, userInfo]);
 
+	const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setName(e.target.value);		
+    };
+
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setEmail(e.target.value);
+        setEmail(e.target.value);		
     };
 
     const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,7 +37,7 @@ const Login: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 		try {
-			const res = await login({ email, password}).unwrap();
+			const res = await register({ name, email, password }).unwrap();
 			dispatch(setCredentials({...res}));
 			navigate('/')
 		} catch (error: any) {
@@ -43,9 +48,20 @@ const Login: React.FC = () => {
     return (
         <div className="mx-auto w-full max-w-sm">	
             <div className="mt-8 bg-white py-8 px-6 shadow-md rounded-md">
-                <h1 className="text-3xl font-semibold mb-4">Sign In</h1>
-                <p className="text-sm mb-4">Sign in to access your account</p>
+                <h1 className="text-3xl font-semibold mb-4">Sign Up</h1>
+                <p className="text-sm mb-4">Sign Up to access your account</p>
                 <form onSubmit={handleSubmit}>
+				<div className="mb-4">
+                        <label htmlFor="name" className="block text-sm font-medium mb-1">Full name</label>
+                        <input
+                            type="text"
+                            id="name"
+                            className="input max-w-full"
+                            placeholder="Type here"
+                            value={name}
+                            onChange={handleNameChange}
+                        />
+                    </div>
                     <div className="mb-4">
                         <label htmlFor="email" className="block text-sm font-medium mb-1">Email address</label>
                         <input
@@ -85,4 +101,4 @@ const Login: React.FC = () => {
     );
 };
 
-export default Login;
+export default Signup;
