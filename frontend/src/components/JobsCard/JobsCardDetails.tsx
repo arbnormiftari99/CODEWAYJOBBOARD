@@ -1,11 +1,19 @@
-import { useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useFetchJobByIdQuery } from '../../slices/jobsApiSlice';
+import { useSelector } from 'react-redux';
 
 
 const JobsCardDetails = () => {
 
+    const navigate = useNavigate();
     const { id } = useParams();
     const { data: job, isLoading, isError } = useFetchJobByIdQuery(id);
+    const { userInfo } = useSelector((state: any) => state.auth);
+
+
+    const handleApplyClick = () => {
+      navigate(`/applyjob/${id}`);
+    };
 
     if (isLoading) return <div>Loading...</div>;
     if (isError) return <div>Error fetching job details</div>;
@@ -41,41 +49,15 @@ const JobsCardDetails = () => {
             {job.description}
           </dd>
         </div>
-        <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-          <dt className="text-sm font-medium leading-6 text-gray-900">Attachments</dt>
-          <dd className="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-            <ul role="list" className="divide-y divide-gray-100 rounded-md border border-gray-200">
-              <li className="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
-                <div className="flex w-0 flex-1 items-center">
-                  <div className="h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
-                  <div className="ml-4 flex min-w-0 flex-1 gap-2">
-                    <span className="truncate font-medium">resume_back_end_developer.pdf</span>
-                    <span className="flex-shrink-0 text-gray-400">2.4mb</span>
-                  </div>
-                </div>
-                <div className="ml-4 flex-shrink-0">
-                  <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                    Download
-                  </a>
-                </div>
-              </li>
-              <li className="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
-                <div className="flex w-0 flex-1 items-center">
-                  <div className="h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
-                  <div className="ml-4 flex min-w-0 flex-1 gap-2">
-                    <span className="truncate font-medium">coverletter_back_end_developer.pdf</span>
-                    <span className="flex-shrink-0 text-gray-400">4.5mb</span>
-                  </div>
-                </div>
-                <div className="ml-4 flex-shrink-0">
-                  <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                    Download
-                  </a>
-                </div>
-              </li>
-            </ul>
-          </dd>
-        </div>
+        {userInfo ? (
+          <button type="submit" className="btn-primary w-full mb-4 h-10" onClick={handleApplyClick}>Apply for this job</button>
+        ) : (
+          // <button type="submit" className="btn-primary w-full mb-4 h-10">You must Login before you apply for this job</button>
+          <Link to="/login" type="submit" className="btn-primary w-full mb-4 h-10">You must Login before you apply for this job</Link>
+
+
+        )}
+      
       </dl>
     </div>
   </div>

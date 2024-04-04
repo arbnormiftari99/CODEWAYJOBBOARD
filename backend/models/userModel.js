@@ -18,7 +18,22 @@ const userSchema = new mongoose.Schema({
         default: 'candidate',
         required: true
        
-    }
+    },
+    resume: {
+        type: String,
+        required: false
+      },
+      coverLetter: {
+        type: String,
+        required: false
+
+      },
+      appliedJobs: {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'JobListing',
+        required: false
+
+      },
 })
 
 userSchema.pre('save', async function(next){

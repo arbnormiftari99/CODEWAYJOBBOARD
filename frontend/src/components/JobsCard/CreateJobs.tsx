@@ -53,7 +53,10 @@ const CreateJobs: React.FC = () => {
             title,
             companyname,
             location,
-            description
+            description,
+            userId: userInfo._id,
+            
+            
          };
          const res =  createJobs(createJob);
                
