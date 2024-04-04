@@ -30,6 +30,14 @@ export const jobsApiSlice = apiSlice.injectEndpoints({
         credentials: "include"
       }),
       invalidatesTags: [{ type: 'Jobs', id: 'fetchall' }]   
+     }),
+     applyJob: builder.mutation({
+      query: (data) => ({
+        url: `${JOBS_URL}/applyjob`,
+        method: 'POST',
+        body: data,
+        credentials: "include"
+      })
      })
   })
 })
@@ -38,5 +46,6 @@ export const jobsApiSlice = apiSlice.injectEndpoints({
 export const {
  useFetchJobsQuery,
  useCreateJobsMutation,
- useFetchJobByIdQuery
+ useFetchJobByIdQuery,
+ useApplyJobMutation
 } = jobsApiSlice
