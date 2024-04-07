@@ -4,9 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLoginMutation } from '../../slices/usersApiSlice';
 import { setCredentials } from '../../slices/authSlice';
 import { toast } from 'react-toastify';
+
 const Login: React.FC = () => {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+
 	
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
@@ -33,6 +35,7 @@ const Login: React.FC = () => {
         e.preventDefault();
 		try {
 			const res = await login({ email, password}).unwrap();
+            console.log(res);
 			dispatch(setCredentials({...res}));
 			navigate('/')
 		} catch (error: any) {

@@ -12,6 +12,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { CookiesProvider } from 'react-cookie';
 import JobsCardDetails from './components/JobsCard/JobsCardDetails';
+import ApplicationForm from './components/JobApplication/ApplicationForm';
 
 const App: React.FC = () => (
   <div className="container">
@@ -26,6 +27,7 @@ const App: React.FC = () => (
       <Route path="/profile" element={<Profile />} />
       <Route path="/createjob" element={<CreateJobs />} />
       <Route path="/jobs/:id" element={<JobsCardDetails />} />
+      <Route path="/applyjob/:id" element={<ApplicationForm/>}/>
 		</Routes>
     </BrowserRouter>
     </CookiesProvider>

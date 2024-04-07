@@ -2,15 +2,21 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'; 
 import { clearCredentials } from '../slices/authSlice';
-import { useLogoutMutation } from '../slices/usersApiSlice';
+import { useLogoutMutation, useTesttestQuery } from '../slices/usersApiSlice';
 import { Link, useNavigate } from 'react-router-dom'; // Import Link from react-router-dom
 import { toast } from 'react-toastify';
+import { useTestMutation } from '../slices/usersApiSlice';
+import { useCookies } from 'react-cookie';
 
 function Navbar() {
 	const { userInfo }= useSelector((state: any) => state.auth);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const [ logout ] = useLogoutMutation();
+	const [test] = useTestMutation();
+	const {data, refetch} = useTesttestQuery({});
+
+	const [cookies, setCookie] = useCookies(['user'])
 
 
     const logoutHandler = async () => {
@@ -29,7 +35,7 @@ function Navbar() {
 		<a className="navbar-item">Job Board</a>
 	</div>
 	<div className="navbar-end">
-		<a className="navbar-item">Add a job</a>
+		<Link to="/createjob" className="navbar-item">Add a job</Link>
 	</div>
 	<div className="navbar-end">
 		<a className="navbar-item">Find a job</a>
@@ -46,11 +52,7 @@ function Navbar() {
 				</label>
 			<div className="dropdown-menu dropdown-menu-bottom-left">
 					<Link to="/profile" className="dropdown-item text-sm">Profile</Link>
-
 					<Link to="/" className="dropdown-item text-sm" onClick={logoutHandler}>Logout</Link>
-
-					{/* <a tabIndex={-1} className="dropdown-item text-sm">Account settings</a>
-					<a tabIndex={-1} className="dropdown-item text-sm">Subscriptions</a> */}
 				</div>
 			</div>
 		</div>
@@ -58,9 +60,9 @@ function Navbar() {
 </div>
 	) : (
 		<div className="navbar-end">
-                    <Link to="/login" className="navbar-item">Login</Link>
+         <Link to="/login" className="navbar-item">Login</Link>
 
-			</div>
+		</div>
 	)}
 
 </div>
