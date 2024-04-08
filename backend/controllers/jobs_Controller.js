@@ -51,6 +51,19 @@ const getJobById = asyncHandler(async (req, res) => {
     }
 });
 
+const deleteJobById = asyncHandler(async (req, res) => {
+    const jobId = req.params.id;
+    try {
+        const job = await Jobs.findByIdAndDelete(jobId);
+        if(!job){
+            return res.status(404).json({ message: "Job not found" });
+        }
+        res.status(200).json(job);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+})
+
 const updateJob = asyncHandler(async (req, res) => {
   const jobId = req.params.id;
   const { title, companyname, location, description } = req.body;
@@ -76,4 +89,4 @@ const updateJob = asyncHandler(async (req, res) => {
 
 
 
-module.exports = { getAllJobs, createJob, updateJob, getJobById }
+module.exports = { getAllJobs, createJob, updateJob, getJobById, deleteJobById }
