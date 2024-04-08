@@ -38,6 +38,14 @@ export const jobsApiSlice = apiSlice.injectEndpoints({
         body: data,
         credentials: "include"
       })
+     }),
+     deleteJob: builder.mutation({
+      query: (id) => ({
+        url: `${JOBS_URL}/${id}`,
+        method: 'DELETE',
+        body: id,
+      }),
+      invalidatesTags: [{ type: 'Jobs', id: 'fetchall' }]   
      })
   })
 })
@@ -47,5 +55,6 @@ export const {
  useFetchJobsQuery,
  useCreateJobsMutation,
  useFetchJobByIdQuery,
- useApplyJobMutation
+ useApplyJobMutation,
+ useDeleteJobMutation
 } = jobsApiSlice
