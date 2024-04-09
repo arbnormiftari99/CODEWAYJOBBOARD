@@ -15,7 +15,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
 app.use(cors({
-  origin: 'https://jobboard-gold.vercel.app/',
+  origin: 'https://jobboard-gold.vercel.app',
   methods: ['GET', 'OPTIONS', 'PATCH', 'DELETE', 'POST', 'PUT'],
   credentials: true
 }));
