@@ -1,6 +1,6 @@
 import { apiSlice } from './apiSlice'
 
-const USERS_URL = 'http://localhost:5000/users';
+const USERS_URL = 'https://codewayjobboard.vercel.app/users';
 
 export const usersApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
