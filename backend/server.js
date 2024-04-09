@@ -22,7 +22,15 @@ app.use(cors({
 
 app.use('/users', userRoutes);
 app.use('/jobs', jobsRoutes);
+// app.post('/api/users/test', function (req, res) {
+//   res.cookie('test', 'test12', {sameSite: 'lax', httpOnly: false});
+//   res.status(200).json({ message: 'hello'});
+// })
+// app.get('/users/test', function (req, res) {
+//   console.log(req.cookies);
+//   res.status(200).json({ message: 'hello'});
 
+// })
 
 mongoose
   .connect(process.env.CONNECTION_STRING, {
