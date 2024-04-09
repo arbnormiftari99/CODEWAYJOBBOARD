@@ -20,17 +20,14 @@ app.use(cors({
 
 }));
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "https://jobboard-gold.vercel.app");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 app.use('/users', userRoutes);
 app.use('/jobs', jobsRoutes);
-// app.post('/api/users/test', function (req, res) {
-//   res.cookie('test', 'test12', {sameSite: 'lax', httpOnly: false});
-//   res.status(200).json({ message: 'hello'});
-// })
-// app.get('/users/test', function (req, res) {
-//   console.log(req.cookies);
-//   res.status(200).json({ message: 'hello'});
-
-// })
 
 mongoose
   .connect(process.env.CONNECTION_STRING, {
