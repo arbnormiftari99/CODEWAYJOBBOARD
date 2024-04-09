@@ -2,21 +2,15 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'; 
 import { clearCredentials } from '../slices/authSlice';
-import { useLogoutMutation, useTesttestQuery } from '../slices/usersApiSlice';
+import { useLogoutMutation } from '../slices/usersApiSlice';
 import { Link, useNavigate } from 'react-router-dom'; // Import Link from react-router-dom
 import { toast } from 'react-toastify';
-import { useTestMutation } from '../slices/usersApiSlice';
-import { useCookies } from 'react-cookie';
 
 function Navbar() {
 	const { userInfo }= useSelector((state: any) => state.auth);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const [ logout ] = useLogoutMutation();
-	const [test] = useTestMutation();
-	const {data, refetch} = useTesttestQuery({});
-
-	const [cookies, setCookie] = useCookies(['user'])
 
 
     const logoutHandler = async () => {
