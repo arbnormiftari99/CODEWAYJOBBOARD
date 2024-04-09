@@ -20,6 +20,9 @@ app.use(cors({
   credentials: true
 }));
 
+app.get('/', (req, res) => {
+  res.send('Welcome to the Job Board application!');
+});
 
 
 app.use('/users', userRoutes);
