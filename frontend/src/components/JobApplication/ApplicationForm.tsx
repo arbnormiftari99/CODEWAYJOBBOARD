@@ -105,7 +105,7 @@ const ApplicationForm = () => {
             <label className="sr-only" htmlFor="message">Cover Letter</label>
     
             <textarea className="textarea textarea-solid max-w-full" 
-            placeholder="Message" 
+            placeholder="Cover Letter" 
             rows={8} 
             id="coverletter"
             value={coverLetter}

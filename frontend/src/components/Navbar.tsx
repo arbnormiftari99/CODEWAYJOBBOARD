@@ -3,7 +3,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'; 
 import { clearCredentials } from '../slices/authSlice';
 import { useLogoutMutation } from '../slices/usersApiSlice';
-import { Link, useNavigate } from 'react-router-dom'; // Import Link from react-router-dom
+import { Link, useNavigate } from 'react-router-dom'; 	
 import { toast } from 'react-toastify';
 
 function Navbar() {
@@ -26,13 +26,13 @@ function Navbar() {
   return (
 <div className="navbar rounded-lg">
 	<div className="navbar-start">
-		<a className="navbar-item">Job Board</a>
+		<Link to="/" className="navbar-item">Job Board</Link>
 	</div>
 	<div className="navbar-end">
 		<Link to="/createjob" className="navbar-item">Add a job</Link>
 	</div>
 	<div className="navbar-end">
-		<a className="navbar-item">Find a job</a>
+		<Link to="/" className="navbar-item">Find a job</Link>
 	</div>
 	{userInfo ? (
 	<div className="navbar-end">

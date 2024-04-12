@@ -88,7 +88,7 @@ const JobsCard: React.FC = () => {
 </form>
 <div className="grid grid-cols-4 gap-4">
 </div>
-      <div className="grid md:grid-cols-4 sm:grid-cols-2 gap-4 mx-10">
+      <div className="grid md:grid-cols-4 sm:grid-cols-2 gap-4 mx-10 mt-5">
         {filteredJobs?.map((job: Job) => ( 
           <div className="col-md-4 mb-3" key={job._id}>
             <div className="card">
