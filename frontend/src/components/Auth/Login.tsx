@@ -71,6 +71,10 @@ const Login: React.FC = () => {
                             onChange={handlePasswordChange}
                         />
                     </div>
+                    <p>Test user:
+                        asdasd@gmail.com
+                        123
+                    </p>
                     <div className="mb-4 flex justify-between items-center">
                         <div>
                             <input type="checkbox" className="checkbox mr-2" id="remember-me" />
