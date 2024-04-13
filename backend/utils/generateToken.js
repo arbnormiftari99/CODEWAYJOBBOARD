@@ -7,12 +7,12 @@ const generateToken = (res, userId) => {
 
     const cookieOptions = {
         httpOnly: true,
-        maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+        maxAge: 30 * 24 * 60 * 60 * 1000, 
     };
 
     if (process.env.NODE_ENV === 'production') {
         cookieOptions.secure = true; 
-        cookieOptions.sameSite = 'None'; 
+        cookieOptions.sameSite = 'Strict'; 
     }
 
     res.cookie('jwt', token, cookieOptions);
