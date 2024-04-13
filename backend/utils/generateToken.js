@@ -12,7 +12,7 @@ const generateToken = (res, userId) => {
 
     if (process.env.NODE_ENV === 'production') {
         cookieOptions.secure = true; 
-        cookieOptions.sameSite = 'Strict'; 
+        cookieOptions.sameSite = 'None'; 
     }
 
     res.cookie('jwt', token, cookieOptions);
