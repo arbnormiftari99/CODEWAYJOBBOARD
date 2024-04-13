@@ -12,7 +12,7 @@ const authUser = asyncHandler(async (req, res) => {
     const user = await User.findOne({ email });
 
     if(user && (await user.matchPassword(password))){
-    //    generateToken(res, user._id);
+       generateToken(res, user._id);
         res.status(201).json({
             _id: user._id,
             name: user.name,
@@ -40,7 +40,7 @@ const registerUser = asyncHandler(async (req, res) => {
     role
    })
     if(user){
-    // generateToken(res, user._id)
+    generateToken(res, user._id)
     res.status(201).json({
         _id: user._id,
         name: user.name,
