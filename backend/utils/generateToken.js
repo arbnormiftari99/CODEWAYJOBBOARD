@@ -7,12 +7,14 @@ const generateToken = (res, userId) => {
 
     const cookieOptions = {
         httpOnly: true,
-        maxAge: 30 * 24 * 60 * 60 * 1000, 
+        maxAge: 30 * 24 * 60 * 60 * 1000,
+        domain: 'https://jobboard-gold.vercel.app',
+        path: '/'
     };
 
     if (process.env.NODE_ENV === 'production') {
         cookieOptions.secure = true; 
-        cookieOptions.sameSite = 'None'; 
+        // cookieOptions.sameSite = 'None'; 
     }
 
     res.cookie('jwt', token, cookieOptions);
