@@ -10,8 +10,8 @@ const token = jwt.sign({userId }, process.env.JWT_SECRET, {
         httpOnly: true,
         secure: process.env.NODE_ENV !== 'development',
         maxAge: 30 * 24 * 60 * 60 * 1000,
-        domain: 'https://jobboard-gold.vercel.app',
-        path: '/',
+        // domain: 'https://jobboard-gold.vercel.app',
+        // path: '/',
     });
 
 }
